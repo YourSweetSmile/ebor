@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <springProperty scope="context" source="ebor.log.path" name="log.path"/>
+    <springProperty scope="context" source="ebor.log.level" name="log.level"/>
+    <!--<property name="log.path" value="G:\\logs"/>-->
+
+    <property name="project.name" value="ebor"/>
+    <property name="log.pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5t] %-5p %-65logger line:%-3L: %n -- %msg%n%n"/>
+    <property name="log.stdout"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5t] %-5p %-65logger line:%-3L: %msg%n"/>
+    <property name="maxFileSize" value="10MB"/>
+    <property name="totalSizeCap" value="1GB"/>
+    <property name="maxHistory" value="60"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.stdout}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+    </appender>
+
+    <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${project.name}_info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/history/${project.name}_info-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>info</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${project.name}_warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/history/${project.name}_error-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>warn</level>
+        </filter>
+    </appender>
+
+    <appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${project.name}_debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/history/${project.name}_web-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${log.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+    </appender>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNC_INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE_INFO"/>
+    </appender>
+
+    <appender name="ASYNC_WARN" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE_WARN"/>
+    </appender>
+
+    <appender name="ASYNC_DEBUG" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="FILE_DEBUG"/>
+    </appender>
+
+    <springProfile name="dev">
+        <root level="${log.level}">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNC_INFO"/>
+            <appender-ref ref="ASYNC_WARN"/>
+            <appender-ref ref="ASYNC_DEBUG"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <root level="${log.level}">
+            <appender-ref ref="ASYNC_INFO"/>
+            <appender-ref ref="ASYNC_WARN"/>
+            <appender-ref ref="ASYNC_DEBUG"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prd">
+        <root level="${log.level}">
+            <appender-ref ref="ASYNC_INFO"/>
+            <appender-ref ref="ASYNC_WARN"/>
+            <appender-ref ref="ASYNC_DEBUG"/>
+        </root>
+    </springProfile>
+</configuration>
