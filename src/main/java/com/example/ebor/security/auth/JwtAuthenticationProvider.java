@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.ebor.security.JwtTokenUtil;
 import com.example.ebor.security.UserContext;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,10 @@ import io.jsonwebtoken.Jws;
  *
  */
 @Component
+@Slf4j
 @SuppressWarnings("unchecked")
 public class JwtAuthenticationProvider implements AuthenticationProvider {
-	
-	private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationProvider.class);
-	
+
 	@Autowired
 	private JwtTokenUtil tokenUtil;
 
@@ -42,7 +42,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         String subject = jwsClaims.getBody().getSubject();
         int userId = jwsClaims.getBody().get("userId", Integer.class);
         List<String> roles = jwsClaims.getBody().get("roles", List.class);
-        logger.debug("username:{}, userid:{}, roles:{}", subject, userId, roles);
+        log.debug("username:{}, userId:{}, roles:{}", subject, userId, roles);
         UserContext context = UserContext.create(userId, subject, mapToGrantedAuthorities(roles));
         
         return new JwtAuthenticationToken(context, context.getAuthorities());
