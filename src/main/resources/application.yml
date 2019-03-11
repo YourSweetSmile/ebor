@@ -2,6 +2,16 @@ spring:
   profiles:
     active: dev
 
+  app:
+    security:
+      protectUrl: /api/**
+      permitUrl: /api/auth/login,/api/auth/register
+      tokenExpirationTime: 1800
+      refreshTokenExpTime: 3600
+      tokenSigningKey: ebor123
+      tokenHeaderParam: X-Authorization
+
+
 ---
 spring:
   profiles: dev

@@ -53,14 +53,32 @@
 		</dependency>
 		<!--end lombok-->
 
-		<!-- start jjwt -->
+		<!-- start jwt -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
 		</dependency>
-		<!-- end jjwt -->
+		<!-- end jwt -->
+
+		<!-- start commons-->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
+		</dependency>
+		<!-- end commons-->
 	</dependencies>
+
 
 	<build>
 		<plugins>
