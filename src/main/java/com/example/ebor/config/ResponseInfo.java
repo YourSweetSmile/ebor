@@ -1,33 +1,34 @@
 package com.example.ebor.config;
 
+/**
+ * 返回参数统一化
+ * @author yinjunwu
+ * @param <T>
+ */
 public class ResponseInfo<T> {
 
 	private boolean success;
-	private long timestamp;
-	private T message;
-	private String url;
-	
-	public ResponseInfo(boolean success, T message, String url) {
-        this.message = message;
+	private long timestamp=System.currentTimeMillis();
+	private T data;
+	private String msg;
+
+	public ResponseInfo(boolean success,String msg){
+		this.success=success;
+		this.msg=msg;
+	}
+
+	public ResponseInfo(boolean success, T data, String msg) {
+        this.data = data;
         this.success = success;
-        this.url = url;
-        this.timestamp = System.currentTimeMillis();
+        this.msg = msg;
     }
 
-	public T getMessage() {
-		return message;
+	public boolean isSuccess() {
+		return success;
 	}
 
-	public void setMessage(T message) {
-		this.message = message;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 
 	public long getTimestamp() {
@@ -38,12 +39,19 @@ public class ResponseInfo<T> {
 		this.timestamp = timestamp;
 	}
 
-	public boolean isSuccess() {
-		return success;
+	public T getData() {
+		return data;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public void setData(T data) {
+		this.data = data;
 	}
 
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 }
