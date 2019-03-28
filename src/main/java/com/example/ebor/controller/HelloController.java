@@ -10,7 +10,7 @@ import java.util.Map;
 /** HelloController */
 @RestController
 @Slf4j
-@RequestMapping("/hello")
+@RequestMapping("/api/hello")
 public class HelloController {
 
     /**
