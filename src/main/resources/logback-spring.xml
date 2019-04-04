@@ -7,7 +7,7 @@
 
     <property name="project.name" value="ebor"/>
     <property name="log.pattern"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5t] %-5p %-65logger line:%-3L: %n -- %msg%n%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5t] %-5p %-65logger line:%-3L: %msg%n"/>
     <property name="log.stdout"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5t] %-5p %-65logger line:%-3L: %msg%n"/>
     <property name="maxFileSize" value="10MB"/>

@@ -1,6 +1,6 @@
 package com.example.ebor.controller;
 
-import com.example.ebor.model.TestSysUser;
+import com.example.ebor.model.SysUser;
 import com.example.ebor.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,7 @@ public class AuthController {
     private AuthService authService;
 
     @RequestMapping("/login")
-    public Map<String, String> login(@RequestBody TestSysUser user) {
+    public Map<String, String> login(@RequestBody SysUser user) {
 
         return authService.login(user);
     }

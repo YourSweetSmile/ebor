@@ -61,13 +61,11 @@
 			<property name="enableSubPackages" value="ture" />
 		</javaClientGenerator>
 
-		
-		<table tableName="test_sys_user" domainObjectName="TestSysUser"
-			   enableCountByExample="false"
-			   enableUpdateByExample="false"
-			   enableDeleteByExample="false"
-			   enableSelectByExample="false"
-			   selectByExampleQueryId="false">
+		<table tableName="test_sys_user" domainObjectName="TestSysUser">
+		</table>
+		<table tableName="sys_user" domainObjectName="SysUser">
+		</table>
+		<table tableName="sys_role" domainObjectName="SysRole">
 		</table>
 	</context>
 </generatorConfiguration>

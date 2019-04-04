@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.ebor.mapper.TestSysUserMapper">
-  <resultMap id="BaseResultMap" type="com.example.ebor.model.TestSysUser">
-    <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="login_no" jdbcType="VARCHAR" property="loginNo" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="user_amount" jdbcType="DECIMAL" property="userAmount" />
+<mapper namespace="com.example.ebor.mapper.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.example.ebor.model.SysRole">
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_remark" jdbcType="VARCHAR" property="roleRemark" />
+    <result column="jurisdiction" jdbcType="VARCHAR" property="jurisdiction" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, login_no, user_name, user_amount, create_time
+    role_id, role_name, role_remark, jurisdiction, create_time
   </sql>
-  <select id="selectByExample" parameterType="com.example.ebor.model.TestSysUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.ebor.model.SysRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from test_sys_user
+    from sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,82 +94,82 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from test_sys_user
-    where user_id = #{userId,jdbcType=BIGINT}
+    from sys_role
+    where role_id = #{roleId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from test_sys_user
-    where user_id = #{userId,jdbcType=BIGINT}
+    delete from sys_role
+    where role_id = #{roleId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.ebor.model.TestSysUserExample">
-    delete from test_sys_user
+  <delete id="deleteByExample" parameterType="com.example.ebor.model.SysRoleExample">
+    delete from sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.ebor.model.TestSysUser">
-    insert into test_sys_user (user_id, login_no, user_name, 
-      user_amount, create_time)
-    values (#{userId,jdbcType=BIGINT}, #{loginNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{userAmount,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.ebor.model.SysRole">
+    insert into sys_role (role_id, role_name, role_remark, 
+      jurisdiction, create_time)
+    values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleRemark,jdbcType=VARCHAR}, 
+      #{jurisdiction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.ebor.model.TestSysUser">
-    insert into test_sys_user
+  <insert id="insertSelective" parameterType="com.example.ebor.model.SysRole">
+    insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
+      <if test="roleId != null">
+        role_id,
       </if>
-      <if test="loginNo != null">
-        login_no,
+      <if test="roleName != null">
+        role_name,
       </if>
-      <if test="userName != null">
-        user_name,
+      <if test="roleRemark != null">
+        role_remark,
       </if>
-      <if test="userAmount != null">
-        user_amount,
+      <if test="jurisdiction != null">
+        jurisdiction,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
       </if>
-      <if test="loginNo != null">
-        #{loginNo,jdbcType=VARCHAR},
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
+      <if test="roleRemark != null">
+        #{roleRemark,jdbcType=VARCHAR},
       </if>
-      <if test="userAmount != null">
-        #{userAmount,jdbcType=DECIMAL},
+      <if test="jurisdiction != null">
+        #{jurisdiction,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.ebor.model.TestSysUserExample" resultType="java.lang.Long">
-    select count(*) from test_sys_user
+  <select id="countByExample" parameterType="com.example.ebor.model.SysRoleExample" resultType="java.lang.Long">
+    select count(*) from sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update test_sys_user
+    update sys_role
     <set>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
-      <if test="record.loginNo != null">
-        login_no = #{record.loginNo,jdbcType=VARCHAR},
+      <if test="record.roleName != null">
+        role_name = #{record.roleName,jdbcType=VARCHAR},
       </if>
-      <if test="record.userName != null">
-        user_name = #{record.userName,jdbcType=VARCHAR},
+      <if test="record.roleRemark != null">
+        role_remark = #{record.roleRemark,jdbcType=VARCHAR},
       </if>
-      <if test="record.userAmount != null">
-        user_amount = #{record.userAmount,jdbcType=DECIMAL},
+      <if test="record.jurisdiction != null">
+        jurisdiction = #{record.jurisdiction,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -180,40 +180,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update test_sys_user
-    set user_id = #{record.userId,jdbcType=BIGINT},
-      login_no = #{record.loginNo,jdbcType=VARCHAR},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      user_amount = #{record.userAmount,jdbcType=DECIMAL},
+    update sys_role
+    set role_id = #{record.roleId,jdbcType=BIGINT},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      role_remark = #{record.roleRemark,jdbcType=VARCHAR},
+      jurisdiction = #{record.jurisdiction,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.ebor.model.TestSysUser">
-    update test_sys_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ebor.model.SysRole">
+    update sys_role
     <set>
-      <if test="loginNo != null">
-        login_no = #{loginNo,jdbcType=VARCHAR},
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="roleRemark != null">
+        role_remark = #{roleRemark,jdbcType=VARCHAR},
       </if>
-      <if test="userAmount != null">
-        user_amount = #{userAmount,jdbcType=DECIMAL},
+      <if test="jurisdiction != null">
+        jurisdiction = #{jurisdiction,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.ebor.model.TestSysUser">
-    update test_sys_user
-    set login_no = #{loginNo,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      user_amount = #{userAmount,jdbcType=DECIMAL},
+  <update id="updateByPrimaryKey" parameterType="com.example.ebor.model.SysRole">
+    update sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_remark = #{roleRemark,jdbcType=VARCHAR},
+      jurisdiction = #{jurisdiction,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
-    where user_id = #{userId,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=BIGINT}
   </update>
 </mapper>

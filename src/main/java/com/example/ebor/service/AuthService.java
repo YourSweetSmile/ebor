@@ -1,10 +1,10 @@
 package com.example.ebor.service;
 
-import com.example.ebor.model.TestSysUser;
+import com.example.ebor.model.SysUser;
 
 import java.util.Map;
 
 public interface AuthService {
 
-    Map login(TestSysUser user);
+    Map login(SysUser user);
 }
