@@ -48,7 +48,7 @@ mybatis:
 app:
   security:
     protectUrl: /api/**
-    permitUrl: /api/auth/login,/api/auth/register
+    permitUrl: /api/auth/login,/api/auth/register,/api/hello/**
     tokenExpirationTime: 1800
     refreshTokenExpTime: 3600
     tokenSigningKey: ebor123
