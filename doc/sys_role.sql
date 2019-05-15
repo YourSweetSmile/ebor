@@ -1,5 +1,6 @@
 /*
  Navicat Premium Data Transfer
+ 用来做权限和角色的持久化
 
  Source Server         : local
  Source Server Type    : MySQL

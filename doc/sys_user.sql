@@ -1,5 +1,6 @@
 /*
  Navicat Premium Data Transfer
+ 用来做登录用户的持久化
 
  Source Server         : local
  Source Server Type    : MySQL
