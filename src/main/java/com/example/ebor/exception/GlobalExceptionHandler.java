@@ -2,6 +2,7 @@ package com.example.ebor.exception;
 
 import java.util.Map;
 
+import com.example.ebor.common.SysHttpStatus;
 import com.example.ebor.config.ResponseInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +18,11 @@ import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+/**
+ * 对返回参数的统一处理
+ *
+ * @author yinjw
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler implements ResponseBodyAdvice<Object> {
 
@@ -46,9 +51,9 @@ public class GlobalExceptionHandler implements ResponseBodyAdvice<Object> {
             Object code = ((Map) body).get("status");
             if(null != code && ((Integer)code) == HttpStatus.NOT_FOUND.value()){
 
-                return new ResponseInfo(false, "URL Not Found");
+                return new ResponseInfo(SysHttpStatus.ERROR.isSuccess(), "URL Not Found");
             }
-            return new ResponseInfo(true, body, "请求成功");
+            return new ResponseInfo(SysHttpStatus.SUCCESS.isSuccess(), body, SysHttpStatus.SUCCESS.getMsg());
         }else{
             return body;
         }
@@ -68,20 +73,25 @@ public class GlobalExceptionHandler implements ResponseBodyAdvice<Object> {
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public ResponseInfo requestNotReadable(NullPointerException e) {
+    public ResponseInfo getNullPointerException(NullPointerException e) {
 
-        return getResult(false, "空指针异常", e.getMessage());
+        return getResult(SysHttpStatus.ERROR.isSuccess(), "空指针异常", e.getMessage());
     }
     
     @ExceptionHandler(MultipartException.class)
-    public ResponseInfo handleError1(MultipartException e, RedirectAttributes redirectAttributes) {
-        return getResult(false, e.getMessage(), e.getMessage());
+    public ResponseInfo getMultipartException(MultipartException e, RedirectAttributes redirectAttributes) {
+        return getResult(SysHttpStatus.ERROR.isSuccess(), e.getMessage(), e.getMessage());
+    }
+
+    @ExceptionHandler(SysRuntimeExeption.class)
+    public ResponseInfo getSysException(SysRuntimeExeption e, RedirectAttributes redirectAttributes) {
+        return getResult(SysHttpStatus.ERROR.isSuccess(), e.getMessage(), e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseInfo requestNotReadable(Exception e) {
+    public ResponseInfo getAllError(Exception e) {
 
-        return getResult(false, "未知的异常发生了", e.getMessage());
+        return getResult(SysHttpStatus.ERROR.isSuccess(), "未知的异常发生了", e.getMessage());
     }
 
 }

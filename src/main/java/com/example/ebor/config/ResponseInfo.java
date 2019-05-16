@@ -1,5 +1,7 @@
 package com.example.ebor.config;
 
+import com.example.ebor.common.SysHttpStatus;
+
 /**
  * 返回参数统一化
  * @author yinjunwu
@@ -12,7 +14,13 @@ public class ResponseInfo<T> {
 	private T data;
 	private String msg;
 
-	public ResponseInfo(boolean success,String msg){
+	public ResponseInfo(T data) {
+		this.success = SysHttpStatus.SUCCESS.isSuccess();
+		this.msg = SysHttpStatus.SUCCESS.getMsg();
+		this.data = data;
+	}
+
+	public ResponseInfo(boolean success, String msg){
 		this.success=success;
 		this.msg=msg;
 	}
