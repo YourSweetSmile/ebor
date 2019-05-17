@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource

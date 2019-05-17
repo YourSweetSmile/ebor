@@ -2,6 +2,8 @@ package com.example.ebor.config;
 
 import com.example.ebor.common.SysHttpStatus;
 
+import java.util.Date;
+
 /**
  * 返回参数统一化
  * @author yinjunwu
@@ -10,7 +12,7 @@ import com.example.ebor.common.SysHttpStatus;
 public class ResponseInfo<T> {
 
 	private boolean success;
-	private long timestamp=System.currentTimeMillis();
+	private Date timestamp=new Date();
 	private T data;
 	private String msg;
 
@@ -39,11 +41,11 @@ public class ResponseInfo<T> {
 		this.success = success;
 	}
 
-	public long getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(long timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 
