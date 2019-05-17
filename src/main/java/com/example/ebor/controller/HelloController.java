@@ -1,7 +1,7 @@
 package com.example.ebor.controller;
 
-import com.example.ebor.exception.SysRuntimeExeption;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,9 +10,10 @@ import java.util.Map;
 
 /** HelloController */
 @RestController
-@Slf4j
 @RequestMapping("/api/hello")
 public class HelloController {
+
+    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
 
     /**
      * sayHello
@@ -21,7 +22,7 @@ public class HelloController {
     @RequestMapping("/say")
     public Map sayHello(){
 
-        log.info("------sayHello--------");
+        logger.info("------sayHello--------");
         Map<String,Object> msg = new HashMap<>();
         msg.put("name", new String("ebor"));
         msg.put("word","hello word!");

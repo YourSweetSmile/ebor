@@ -1,7 +1,7 @@
 package com.example.ebor.common;
 
 /**
- * 定义系统处理的返回格式
+ * 定义系统响应的参数
  * @author yinjw
  */
 public enum SysHttpStatus {
