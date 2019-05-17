@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class HelloController {
      * @return
      */
     @RequestMapping("/say")
-    public Map sayHello(){
+    public Map sayHello(TestSysUser user){
 
         logger.info("------sayHello--------");
         Map<String,Object> msg = new HashMap<>();
@@ -37,7 +38,7 @@ public class HelloController {
      * @param user
      * @return
      */
-    @PostMapping("user/get")
+    @RequestMapping("user/get")
     public Map getWord(@RequestBody TestSysUser user){
 
         Map<String,Object> msg = new HashMap<>();

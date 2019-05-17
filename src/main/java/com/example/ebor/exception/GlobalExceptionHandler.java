@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.example.ebor.common.SysHttpStatus;
 import com.example.ebor.config.ResponseInfo;
+import com.fasterxml.jackson.core.JsonParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.MethodParameter;
@@ -85,6 +86,11 @@ public class GlobalExceptionHandler implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(SysRuntimeExeption.class)
     public ResponseInfo getSysException(SysRuntimeExeption e, RedirectAttributes redirectAttributes) {
+        return getResult(SysHttpStatus.ERROR.isSuccess(), e.getMessage(), e.getMessage());
+    }
+
+    @ExceptionHandler(JsonParseException.class)
+    public ResponseInfo getJsonParseException(JsonParseException e, RedirectAttributes redirectAttributes) {
         return getResult(SysHttpStatus.ERROR.isSuccess(), e.getMessage(), e.getMessage());
     }
 

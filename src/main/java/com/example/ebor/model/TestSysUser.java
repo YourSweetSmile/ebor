@@ -1,5 +1,7 @@
 package com.example.ebor.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class TestSysUser implements Serializable {
 
     private BigDecimal userAmount;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
