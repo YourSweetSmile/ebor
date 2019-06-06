@@ -11,7 +11,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/ebor?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+      url: jdbc:mysql://127.0.0.1:3306/db_ebor?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
       username: root
       password: root1234
       ###################以下为druid增加的配置###########################
@@ -43,7 +43,7 @@ spring:
       useGlobalDataSourceStat: true
 
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
+#  mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.example.ebor.model
 
   # sql语句的打印

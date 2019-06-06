@@ -30,11 +30,6 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private SysRoleMapper sysRoleMapper;
 
-    /**
-     * 登录
-     * @param user
-     * @return
-     */
     @Override
     public Map login(SysUser user) {
 
