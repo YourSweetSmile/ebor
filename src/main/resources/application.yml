@@ -43,7 +43,7 @@ spring:
       useGlobalDataSourceStat: true
 
 mybatis:
-#  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.example.ebor.model
 
   # sql语句的打印

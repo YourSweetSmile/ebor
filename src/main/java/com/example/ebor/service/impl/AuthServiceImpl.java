@@ -5,9 +5,11 @@ import com.example.ebor.mapper.SysRoleMapper;
 import com.example.ebor.mapper.SysUserMapper;
 import com.example.ebor.model.SysRole;
 import com.example.ebor.model.SysUser;
+import com.example.ebor.model.SysUserExample;
 import com.example.ebor.security.JwtTokenUtil;
 import com.example.ebor.security.auth.UserContext;
 import com.example.ebor.service.AuthService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * AuthService
+ *
+ * @author yinjw
+ */
 @Service
 public class AuthServiceImpl implements AuthService {
 
@@ -33,7 +41,14 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Map login(SysUser user) {
 
-        SysUser dbUser = sysUserMapper.selectByPrimaryKey(user.getUserId());
+        if(StringUtils.isBlank(user.getUserName())){
+            throw new SysRuntimeExeption("用户名不能为空");
+        }
+
+        SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andUserNameEqualTo(user.getUserName()).example();
+        SysUser dbUser = sysUserMapper.selectOneByExample(sysUserExample);
+
         if(null == dbUser){
             throw new SysRuntimeExeption("当前用户未找到");
         }
@@ -59,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
         UserContext userContext = UserContext.create(Integer.parseInt(user.getUserId().toString()),user.getUserName(),
                 mapToGrantedAuthorities(jurisdiction));
 
-        Map<String, String> tokenMap = new HashMap<>();
+        Map<String, String> tokenMap = new HashMap<>(3);
         tokenMap.put("token", tokenFactory.createAccessToken(userContext));
         tokenMap.put("refreshToken", tokenFactory.createRefreshToken(userContext));
         tokenMap.put("userName", userContext.getUserName());
