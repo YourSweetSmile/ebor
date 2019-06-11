@@ -9,8 +9,10 @@ import com.example.ebor.model.SysUserExample;
 import com.example.ebor.security.JwtTokenUtil;
 import com.example.ebor.security.auth.UserContext;
 import com.example.ebor.service.AuthService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,14 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private SysRoleMapper sysRoleMapper;
 
+    @Value("${app.security.passwordSalt}")
+    private String passwordSalt;
+
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
     @Override
     public Map login(SysUser user) {
 
@@ -53,7 +63,8 @@ public class AuthServiceImpl implements AuthService {
             throw new SysRuntimeExeption("当前用户未找到");
         }
 
-        if(!user.getPassword().equals(dbUser.getPassword())){
+        //密码加盐校验
+        if(!DigestUtils.md5Hex(user.getPassword()+passwordSalt).equals(dbUser.getPassword())){
             throw new SysRuntimeExeption("密码错误");
         }
 

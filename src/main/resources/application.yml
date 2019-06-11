@@ -65,6 +65,7 @@ app:
     refreshTokenExpTime: 3600
     tokenSigningKey: ebor123
     tokenHeaderParam: X-Authorization
+    passwordSalt: ebor123
   log:
     path: "/Users/yinjunwu/dev-work/logs/ebor"
     level: "debug"
