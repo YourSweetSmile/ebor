@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
-    <springProperty scope="context" source="ebor.log.path" name="log.path"/>
-    <springProperty scope="context" source="ebor.log.level" name="log.level"/>
+    <springProperty scope="context" source="app.log.path" name="log.path"/>
+    <springProperty scope="context" source="app.log.level" name="log.level"/>
     <!--<property name="log.path" value="G:\\logs"/>-->
 
     <property name="project.name" value="ebor"/>
