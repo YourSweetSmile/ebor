@@ -78,6 +78,6 @@ public class JwtAuthenticationProcessingFilter extends AbstractAuthenticationPro
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setCharacterEncoding("UTF-8");
-		mapper.writeValue(response.getWriter(), new ResponseInfo<String>(false, e.getMessage(), request.getRequestURL().toString()));
+		mapper.writeValue(response.getWriter(), new ResponseInfo<String>(false, null, e.getMessage()));
 	}
 }

@@ -97,10 +97,10 @@ public class JwtTokenUtil {
         try {
             return Jwts.parser().setSigningKey(settings.getTokenSigningKey()).parseClaimsJws(token);
         } catch (UnsupportedJwtException | MalformedJwtException | IllegalArgumentException | SignatureException ex) {
-            logger.error("token校验错误", ex);
+            logger.error("token校验错误:{}", ex.getMessage());
             throw new BadCredentialsException("认证失败！令牌校验错误", ex);
         } catch (ExpiredJwtException expiredEx) {
-            logger.error("token过期", expiredEx);
+            logger.error("token过期:{}", expiredEx.getMessage());
             throw new ExpiredTokenException(token, "认证令牌过期，请重新登录", expiredEx);
         }
     }

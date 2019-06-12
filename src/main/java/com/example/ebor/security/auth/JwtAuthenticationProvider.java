@@ -24,7 +24,6 @@ import io.jsonwebtoken.Jws;
  *
  */
 @Component
-@SuppressWarnings("unchecked")
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 	
 	private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationProvider.class);
@@ -37,10 +36,11 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         String rawAccessToken = (String) authentication.getCredentials();
 
         Jws<Claims> jwsClaims = tokenUtil.parseClaims(rawAccessToken);
+
         String subject = jwsClaims.getBody().getSubject();
         int userId = jwsClaims.getBody().get("userId", Integer.class);
         List<String> roles = jwsClaims.getBody().get("roles", List.class);
-        logger.debug("username:{}, userid:{}, roles:{}", subject, userId, roles);
+        logger.debug("userName:{}, userId:{}, roles:{}", subject, userId, roles);
         UserContext context = UserContext.create(userId, subject, mapToGrantedAuthorities(roles));
         
         return new JwtAuthenticationToken(context, context.getAuthorities());

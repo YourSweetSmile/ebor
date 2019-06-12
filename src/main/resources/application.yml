@@ -58,9 +58,11 @@ spring:
 server:
   port: 8088
 app:
+  swagger2:
+    show: true
   security:
     protectUrl: /api/**
-    permitUrl: /api/auth/login,/api/auth/register,/api/hello/**
+    permitUrl: /api/auth/login,/api/auth/register
     tokenExpirationTime: 1800
     refreshTokenExpTime: 3600
     tokenSigningKey: ebor123
@@ -70,40 +72,3 @@ app:
     path: "/Users/yinjunwu/dev-work/logs/ebor"
     level: "debug"
 
-
----
-spring:
-  profiles: test
-server:
-  port: 10010
-app:
-  security:
-    protectUrl: /api/**
-    permitUrl: /api/auth/login,/api/auth/register
-    tokenExpirationTime: 1800
-    refreshTokenExpTime: 3600
-    tokenSigningKey: ebor123
-    tokenHeaderParam: X-Authorization
-ebor:
-  log:
-    path: "/Users/yinjunwu/dev-work/logs/ebor"
-    level: "debug"
-
-
----
-spring:
-  profiles: prd
-server:
-  port: 80
-app:
-  security:
-    protectUrl: /api/**
-    permitUrl: /api/auth/login,/api/auth/register
-    tokenExpirationTime: 1800
-    refreshTokenExpTime: 3600
-    tokenSigningKey: ebor123
-    tokenHeaderParam: X-Authorization
-ebor:
-  log:
-    path: "/Users/yinjunwu/dev-work/logs/ebor"
-    level: "info"

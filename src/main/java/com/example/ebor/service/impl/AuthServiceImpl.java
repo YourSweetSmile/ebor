@@ -87,7 +87,9 @@ public class AuthServiceImpl implements AuthService {
 
         Map<String, String> tokenMap = new HashMap<>(3);
         tokenMap.put("token", tokenFactory.createAccessToken(userContext));
-        tokenMap.put("refreshToken", tokenFactory.createRefreshToken(userContext));
+
+        //不需要refreshToken
+        /*tokenMap.put("refreshToken", tokenFactory.createRefreshToken(userContext));*/
         tokenMap.put("userName", userContext.getUserName());
 
         return tokenMap;

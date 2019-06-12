@@ -3,6 +3,7 @@ package com.example.ebor.controller;
 import com.example.ebor.model.SysUser;
 import com.example.ebor.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public Map<String, String> login(@RequestBody SysUser user) {
 
         return authService.login(user);

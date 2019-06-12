@@ -35,8 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private JwtAuthenticationProvider jwtAuthenticationProvider;
+//    @Autowired
+//    private JwtAuthenticationProvider jwtAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -77,8 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(jwtAuthenticationProvider);
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) {
+//        auth.authenticationProvider(jwtAuthenticationProvider);
+//    }
 }
