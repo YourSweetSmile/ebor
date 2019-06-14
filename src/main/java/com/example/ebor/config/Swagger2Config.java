@@ -36,7 +36,7 @@ public class Swagger2Config {
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("springboot 结合 swagger2 构建的 Restful API")
-                .description("无人机数据分析系统")
+                .description("ebor")
                 .termsOfServiceUrl("localhost:8088")
                 .version("0.0.1")
                 .build();
