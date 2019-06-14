@@ -66,7 +66,8 @@ public class JwtAuthenticationProcessingFilter extends AbstractAuthenticationPro
 		
 		JwtTokenUtil tokenFactory = SysUtil.getBean("jwtTokenUtil", JwtTokenUtil.class);
 		String newToken = tokenFactory.createAccessToken((UserContext)authResult.getPrincipal());
-		response.setHeader("token", newToken);
+		System.out.println(newToken);
+		response.setHeader(settings.getTokenHeaderParam(), newToken);
 		
 		chain.doFilter(request, response);
 	}

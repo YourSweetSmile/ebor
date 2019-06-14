@@ -12,7 +12,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 /**
  * 决定哪些路径需要被JwtAuthenticationProcessingFilter处理
  * 
- * @author tangxin
+ * @author yinjw
  *
  */
 public class JwtAuthenticationRequestMatcher implements RequestMatcher {

@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,9 +28,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author yinjw
  */
 @RestControllerAdvice
-public class GlobalExceptionHandler implements ResponseBodyAdvice<Object> {
+public class ResultGlobalHandler implements ResponseBodyAdvice<Object> {
 
-    Logger logger = LogManager.getLogger(GlobalExceptionHandler.class);
+    Logger logger = LogManager.getLogger(ResultGlobalHandler.class);
 
     @Autowired
     private Swagger2Settings swagger2Settings;
@@ -75,7 +74,7 @@ public class GlobalExceptionHandler implements ResponseBodyAdvice<Object> {
                 }
 
                 if(null != code && ((Integer)code) == HttpStatus.UNAUTHORIZED.value()){
-                    return new ResponseInfo(SysHttpStatus.ERROR.isSuccess(), "URL Not Found");
+                    return new ResponseInfo(SysHttpStatus.ERROR.isSuccess(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
                 }
 
             }

@@ -62,11 +62,11 @@ app:
     show: true
   security:
     protectUrl: /api/**
-    permitUrl: /api/auth/login,/api/auth/register
+    permitUrl: /api/auth/login,/api/auth/register,/api/hello/say
     tokenExpirationTime: 1800
     refreshTokenExpTime: 3600
     tokenSigningKey: ebor123
-    tokenHeaderParam: X-Authorization
+    tokenHeaderParam: x-authorization
     passwordSalt: ebor123
   log:
     path: "/Users/yinjunwu/dev-work/logs/ebor"
