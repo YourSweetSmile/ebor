@@ -32,7 +32,7 @@ public class HelloController {
         logger.info("------sayHello--------");
         Map<String,Object> msg = new HashMap<>();
         msg.put("name", new String("ebor"));
-        msg.put("word","hello word!");
+        msg.put("word",System.currentTimeMillis()/1000L+"hello,word");
         return msg;
     }
 

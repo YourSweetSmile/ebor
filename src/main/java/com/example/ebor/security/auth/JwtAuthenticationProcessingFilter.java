@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.example.ebor.config.ResponseInfo;
 import com.example.ebor.security.JwtTokenUtil;
 import com.example.ebor.security.SecuritySettings;
-import com.example.ebor.utils.SysUtil;
+import com.example.ebor.utils.BeanUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,9 +64,8 @@ public class JwtAuthenticationProcessingFilter extends AbstractAuthenticationPro
 		context.setAuthentication(authResult);
 		SecurityContextHolder.setContext(context);
 		
-		JwtTokenUtil tokenFactory = SysUtil.getBean("jwtTokenUtil", JwtTokenUtil.class);
+		JwtTokenUtil tokenFactory = BeanUtil.getBean("jwtTokenUtil", JwtTokenUtil.class);
 		String newToken = tokenFactory.createAccessToken((UserContext)authResult.getPrincipal());
-		System.out.println(newToken);
 		response.setHeader(settings.getTokenHeaderParam(), newToken);
 		
 		chain.doFilter(request, response);
