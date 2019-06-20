@@ -11,6 +11,8 @@ import com.example.ebor.security.auth.UserContext;
 import com.example.ebor.service.AuthService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +32,8 @@ import java.util.Map;
  */
 @Service
 public class AuthServiceImpl implements AuthService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
     @Autowired
     private JwtTokenUtil tokenFactory;
@@ -61,12 +65,14 @@ public class AuthServiceImpl implements AuthService {
 
         if(null == dbUser){
 
+            logger.debug("用户名[{}]未找到",user.getUserName());
             //为了安全考虑，统一采用模糊的概念，防止有害的猜测，从而得到正确的用户名
             throw new SysRuntimeExeption("用户名或密码错误");
         }
 
         //密码加盐校验
         if(!DigestUtils.md5Hex(user.getPassword()+passwordSalt).equals(dbUser.getPassword())){
+            logger.debug("用户名[{}]的密码错误",user.getUserName());
             throw new SysRuntimeExeption("用户名或密码错误");
         }
 
