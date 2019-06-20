@@ -60,12 +60,14 @@ public class AuthServiceImpl implements AuthService {
         SysUser dbUser = sysUserMapper.selectOneByExample(sysUserExample);
 
         if(null == dbUser){
-            throw new SysRuntimeExeption("当前用户未找到");
+
+            //为了安全考虑，统一采用模糊的概念，防止有害的猜测，从而得到正确的用户名
+            throw new SysRuntimeExeption("用户名或密码错误");
         }
 
         //密码加盐校验
         if(!DigestUtils.md5Hex(user.getPassword()+passwordSalt).equals(dbUser.getPassword())){
-            throw new SysRuntimeExeption("密码错误");
+            throw new SysRuntimeExeption("用户名或密码错误");
         }
 
         return packageLoginUser(dbUser);
