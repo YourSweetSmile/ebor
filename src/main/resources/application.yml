@@ -11,9 +11,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/db_ebor?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+      url: jdbc:mysql://127.0.0.1:3306/db_ebor?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
       username: root
-      password: root1234
+      password: root123
       ###################以下为druid增加的配置###########################
       type: com.alibaba.druid.pool.DruidDataSource
       # 下面为连接池的补充设置，应用到上面所有数据源中
@@ -62,7 +62,7 @@ app:
     show: true
   security:
     protectUrl: /api/**
-    permitUrl: /api/auth/login,/api/auth/register,/api/hello/say
+    permitUrl: /api/auth/login,/api/auth/register,/api/hello/**
     tokenExpirationTime: 1800
     refreshTokenExpTime: 3600
     tokenSigningKey: ebor123
