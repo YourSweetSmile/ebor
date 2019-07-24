@@ -1,26 +1,25 @@
 /*
- Navicat Premium Data Transfer
+SQLyog Ultimate v12.08 (64 bit)
+MySQL - 5.7.26-log : Database - db_ebor
+*********************************************************************
+*/
 
- Source Server         : local
- Source Server Type    : MySQL
- Source Server Version : 80013
- Source Host           : localhost:3306
- Source Schema         : db_ebor
+/*!40101 SET NAMES utf8 */;
 
- Target Server Type    : MySQL
- Target Server Version : 80013
- File Encoding         : 65001
+/*!40101 SET SQL_MODE=''*/;
 
- Date: 06/06/2019 14:57:05
-*/
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_ebor` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+USE `db_ebor`;
 
--- ----------------------------
--- Table structure for sys_role
--- ----------------------------
+/*Table structure for table `sys_role` */
+
 DROP TABLE IF EXISTS `sys_role`;
+
 CREATE TABLE `sys_role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(50) NOT NULL,
@@ -30,18 +29,18 @@ CREATE TABLE `sys_role` (
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of sys_role
--- ----------------------------
-BEGIN;
-INSERT INTO `sys_role` VALUES (1, '普通用户', 'user', '主页|商品管理', '1559803939012');
-INSERT INTO `sys_role` VALUES (2, '管理员', 'admin', '主页|用户管理|商品管理|后台管理', '1559803939012');
-COMMIT;
+/*Data for the table `sys_role` */
 
--- ----------------------------
--- Table structure for sys_user
--- ----------------------------
+LOCK TABLES `sys_role` WRITE;
+
+insert  into `sys_role`(`role_id`,`role_name`,`role_remark`,`jurisdiction`,`create_time`) values (1,'普通用户','user','主页|商品管理','1559803939012'),(2,'管理员','admin','主页|用户管理|商品管理|后台管理','1559803939012');
+
+UNLOCK TABLES;
+
+/*Table structure for table `sys_user` */
+
 DROP TABLE IF EXISTS `sys_user`;
+
 CREATE TABLE `sys_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) NOT NULL,
@@ -51,18 +50,18 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of sys_user
--- ----------------------------
-BEGIN;
-INSERT INTO `sys_user` VALUES (1, 'jack', '123456', 1, '1559803939012');
-INSERT INTO `sys_user` VALUES (2, 'admin', '123456', 2, '1559803939012');
-COMMIT;
+/*Data for the table `sys_user` */
 
--- ----------------------------
--- Table structure for test_sys_user
--- ----------------------------
+LOCK TABLES `sys_user` WRITE;
+
+insert  into `sys_user`(`user_id`,`user_name`,`password`,`role_id`,`create_time`) values (1,'jack','123456',1,'1559803939012'),(2,'admin','123456',2,'1559803939012');
+
+UNLOCK TABLES;
+
+/*Table structure for table `test_sys_user` */
+
 DROP TABLE IF EXISTS `test_sys_user`;
+
 CREATE TABLE `test_sys_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `login_no` varchar(50) NOT NULL,
@@ -73,13 +72,15 @@ CREATE TABLE `test_sys_user` (
   UNIQUE KEY `login_no` (`login_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of test_sys_user
--- ----------------------------
-BEGIN;
-INSERT INTO `test_sys_user` VALUES (1, 'admin', 'admin', 102.20, '1559803939012');
-INSERT INTO `test_sys_user` VALUES (2, 'root', 'root', 39.02, '1559803939012');
-INSERT INTO `test_sys_user` VALUES (3, 'user1', 'user1', 10.00, '1559803939012');
-COMMIT;
+/*Data for the table `test_sys_user` */
 
-SET FOREIGN_KEY_CHECKS = 1;
+LOCK TABLES `test_sys_user` WRITE;
+
+insert  into `test_sys_user`(`user_id`,`login_no`,`user_name`,`user_amount`,`create_time`) values (1,'admin','admin','102.20','1559803939012'),(2,'root','root','39.02','1559803939012'),(3,'user1','user1','10.00','1559803939012');
+
+UNLOCK TABLES;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

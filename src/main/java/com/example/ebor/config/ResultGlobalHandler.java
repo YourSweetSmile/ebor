@@ -1,10 +1,10 @@
-package com.example.ebor.exception;
+package com.example.ebor.config;
 
 import java.util.LinkedHashMap;
 
 import com.example.ebor.common.Swagger2Settings;
 import com.example.ebor.common.SysHttpStatus;
-import com.example.ebor.config.ResponseInfo;
+import com.example.ebor.exception.SysRuntimeExeption;
 import com.fasterxml.jackson.core.JsonParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
