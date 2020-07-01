@@ -20,7 +20,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- plugin versions -->
-		<mysql.version>8.0.15</mysql.version>
+		<mysql.version>8.0.16</mysql.version>
 		<swagger2.version>2.9.2</swagger2.version>
 		<mybatis.generator.plugin.version>1.2.20</mybatis.generator.plugin.version>
 		<mybatis.generator.maven.plugin.version>1.3.7</mybatis.generator.maven.plugin.version>
